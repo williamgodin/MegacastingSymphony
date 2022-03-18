@@ -28,5 +28,22 @@ class TypeDeContrat
      */
     private $libelle;
 
+    public function getIdContrat(): ?int
+    {
+        return $this->idContrat;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): self
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
 
 }

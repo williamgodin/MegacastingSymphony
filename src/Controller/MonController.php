@@ -15,12 +15,12 @@ class MonController extends AbstractController
     {
         //Récupération des casting
         $em = $doctrine ->getManager();
-        $enteteREPO = $em -> getRepository(Casting::class);
-        $entetes = $enteteREPO->findAll();
-        dump($entetes);
+        $castingsREPO = $em -> getRepository(Casting::class);
+        $castings = $castingsREPO->findAll();
+
 
         return $this->render('mon/index.html.twig', [
-            'controller_name' => 'MonController',
+            'castings' => $castings,
         ]);
     }
 }

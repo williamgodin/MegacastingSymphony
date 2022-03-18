@@ -28,5 +28,22 @@ class Civilité
      */
     private $genre;
 
+    public function getIdCivilite(): ?int
+    {
+        return $this->idCivilite;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
 
 }

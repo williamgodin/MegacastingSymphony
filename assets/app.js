@@ -1,12 +1,15 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
-
-// any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import './styles/app.scss';
+import 'bootstrap';
 
 // start the Stimulus application
 import './bootstrap';
+
+/* Récupérer les valeurs des range*/
+document.forms.filters.age.oninput = function (e) {
+    let ageValeur = document.getElementById("ageValeur");
+    ageValeur.innerText = document.forms.filters.age.value;
+}
+document.forms.filters.taille.oninput = function (e) {
+    let tailleValeur = document.getElementById("tailleValeur");
+    tailleValeur.innerText = document.forms.filters.taille.value;
+}

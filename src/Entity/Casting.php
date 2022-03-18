@@ -114,5 +114,154 @@ class Casting
      */
     private $Professionnel;
 
+    public function getIdCasting(): ?int
+    {
+        return $this->idCasting;
+    }
+
+    public function getIntitule(): ?string
+    {
+        return $this->intitule;
+    }
+
+    public function setIntitule(string $intitule): self
+    {
+        $this->intitule = $intitule;
+
+        return $this;
+    }
+
+    public function getReference(): ?int
+    {
+        return $this->reference;
+    }
+
+    public function setReference(int $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getDateDebutPublication(): ?\DateTimeInterface
+    {
+        return $this->dateDebutPublication;
+    }
+
+    public function setDateDebutPublication(\DateTimeInterface $dateDebutPublication): self
+    {
+        $this->dateDebutPublication = $dateDebutPublication;
+
+        return $this;
+    }
+
+    public function getNbrPoste(): ?int
+    {
+        return $this->nbrPoste;
+    }
+
+    public function setNbrPoste(int $nbrPoste): self
+    {
+        $this->nbrPoste = $nbrPoste;
+
+        return $this;
+    }
+
+    public function getLocalisation(): ?string
+    {
+        return $this->localisation;
+    }
+
+    public function setLocalisation(string $localisation): self
+    {
+        $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    public function getDescriptionPoste(): ?string
+    {
+        return $this->descriptionPoste;
+    }
+
+    public function setDescriptionPoste(string $descriptionPoste): self
+    {
+        $this->descriptionPoste = $descriptionPoste;
+
+        return $this;
+    }
+
+    public function getDescriptionProfil(): ?string
+    {
+        return $this->descriptionProfil;
+    }
+
+    public function setDescriptionProfil(string $descriptionProfil): self
+    {
+        $this->descriptionProfil = $descriptionProfil;
+
+        return $this;
+    }
+
+    public function getCoordonnees(): ?string
+    {
+        return $this->coordonnees;
+    }
+
+    public function setCoordonnees(string $coordonnees): self
+    {
+        $this->coordonnees = $coordonnees;
+
+        return $this;
+    }
+
+    public function getDureeDiffusion(): ?\DateTimeInterface
+    {
+        return $this->dureeDiffusion;
+    }
+
+    public function setDureeDiffusion(\DateTimeInterface $dureeDiffusion): self
+    {
+        $this->dureeDiffusion = $dureeDiffusion;
+
+        return $this;
+    }
+
+    public function getContrat(): ?TypeDeContrat
+    {
+        return $this->Contrat;
+    }
+
+    public function setContrat(?TypeDeContrat $Contrat): self
+    {
+        $this->Contrat = $Contrat;
+
+        return $this;
+    }
+
+    public function getMetier(): ?Métier
+    {
+        return $this->Metier;
+    }
+
+    public function setMetier(?Métier $Metier): self
+    {
+        $this->Metier = $Metier;
+
+        return $this;
+    }
+
+    public function getProfessionnel(): ?Professionnel
+    {
+        return $this->Professionnel;
+    }
+
+    public function setProfessionnel(?Professionnel $Professionnel): self
+    {
+        $this->Professionnel = $Professionnel;
+
+        return $this;
+    }
+
 
 }

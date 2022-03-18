@@ -38,5 +38,34 @@ class Métier
      */
     private $DomaineMetier;
 
+    public function getIdMetier(): ?int
+    {
+        return $this->idMetier;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): self
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getDomaineMetier(): ?DomaineDeMétier
+    {
+        return $this->DomaineMetier;
+    }
+
+    public function setDomaineMetier(?DomaineDeMétier $DomaineMetier): self
+    {
+        $this->DomaineMetier = $DomaineMetier;
+
+        return $this;
+    }
+
 
 }

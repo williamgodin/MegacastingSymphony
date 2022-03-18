@@ -35,5 +35,34 @@ class Utilisateur
      */
     private $password;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdentifiant(): ?string
+    {
+        return $this->identifiant;
+    }
+
+    public function setIdentifiant(string $identifiant): self
+    {
+        $this->identifiant = $identifiant;
+
+        return $this;
+    }
+
+    public function getPassword(): ?bool
+    {
+        return $this->password;
+    }
+
+    public function setPassword(bool $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
 
 }

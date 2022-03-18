@@ -24,5 +24,17 @@ class Professionnel
      */
     private $idPersonne;
 
+    public function getIdPersonne(): ?Personne
+    {
+        return $this->idPersonne;
+    }
+
+    public function setIdPersonne(?Personne $idPersonne): self
+    {
+        $this->idPersonne = $idPersonne;
+
+        return $this;
+    }
+
 
 }

@@ -30,5 +30,15 @@ class Participer
      */
     private $idArtiste;
 
+    public function getIdCasting(): ?int
+    {
+        return $this->idCasting;
+    }
+
+    public function getIdArtiste(): ?int
+    {
+        return $this->idArtiste;
+    }
+
 
 }
