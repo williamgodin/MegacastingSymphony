@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MonController!{% endblock %}
+{% block title %}Megacasting{% endblock %}
 
 {% block body %}
 <style>
@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
+                <div class="accordion-item ">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -70,7 +70,7 @@
         </div>
         <div class="col-md-9" id="listCasting">
             {% for casting in castings %}
-                {{ include('layout/littleCasting.html.twig', {'casting': casting}) }}
+            {{ include('layout/littleCasting.html.twig', {'casting': casting}) }}
             {% endfor %}
         </div>
         {% endblock %}

@@ -8,9 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MonController extends AbstractController
+class FooterController extends AbstractController
 {
-    #[Route('/', name: 'app_mon')]
+    #[Route('/footer', name: 'app_footer')]
     public function index(ManagerRegistry $doctrine): Response
     {
         //Récupération des casting
@@ -19,9 +19,8 @@ class MonController extends AbstractController
         $castings = $castingsREPO->findAll();
 
 
-        return $this->render('mon/index.html.twig', [
+        return $this->render('layout/footer.html.twig', [
             'castings' => $castings,
         ]);
-
     }
 }

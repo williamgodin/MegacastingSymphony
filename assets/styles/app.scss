@@ -27,6 +27,10 @@ body{
     display: flex;
     justify-content: center;
 }
+#nav-header{
+    display: flex;
+    flex-direction: row;
+}
 // CASTING LIST
 #listCasting {
     display: flex;

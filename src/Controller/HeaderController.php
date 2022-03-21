@@ -8,9 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MonController extends AbstractController
+class headerController extends AbstractController
 {
-    #[Route('/', name: 'app_mon')]
+    #[Route('/header', name: 'app_header')]
     public function index(ManagerRegistry $doctrine): Response
     {
         //Récupération des casting
@@ -18,10 +18,11 @@ class MonController extends AbstractController
         $castingsREPO = $em -> getRepository(Casting::class);
         $castings = $castingsREPO->findAll();
 
-
-        return $this->render('mon/index.html.twig', [
+        return $this->render('layout/header.html.twig', [
             'castings' => $castings,
         ]);
+
+        //Recherche d'un casting
 
     }
 }
