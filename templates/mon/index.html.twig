@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9" id="listCasting">
+        <div class="col-md-9 d-flex flex-wrap justify-content-around">
             {% for casting in castings %}
             {{ include('layout/littleCasting.html.twig', {'casting': casting}) }}
             {% endfor %}

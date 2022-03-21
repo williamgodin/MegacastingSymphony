@@ -22,7 +22,5 @@ class headerController extends AbstractController
             'castings' => $castings,
         ]);
 
-        //Recherche d'un casting
-
     }
 }

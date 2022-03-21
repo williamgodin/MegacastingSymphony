@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Megacasting{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-3">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item ">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Filtres
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <form action="" name="filters">
+                            <label for="customRange2" class="form-label">Age</label>: <label for="customRange2"
+                                                                                             class="form-label"
+                                                                                             id="ageValeur">49</label>
+                            ans
+                            <input type="range" class="form-range" min="18" max="80" id="customRange2" name="age">
+
+                            <label for="customRange2" class="form-label">Taille</label>: <label for="customRange2"
+                                                                                                class="form-label"
+                                                                                                id="tailleValeur">155</label>
+                            cm
+                            <input type="range" class="form-range" min="100" max="210" id="customRange2"
+                                   name="taille">
+
+                            <div class="form-check pb-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Femme
+                                </label>
+                            </div>
+                            <div class="form-check pb-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Homme
+                                </label>
+                            </div>
+
+                            <div class="col-auto" id="filterButton">
+                                <button type="submit" class="btn btn-primary mb-3">Appliquer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 d-flex flex-wrap justify-content-around">
+        <div class="col-md-4">
+            <h1>{{ casting.intitule}}</h1>
+            <img src="{{ asset('img/pouet.jpeg') }}">
+        </div>
+        <div class="col-md-5 mt-5">
+            <p><u>Description du profil rechercher:</u> {{ casting.descriptionprofil }}</p>
+            <p><u>Description du poste:</u> {{ casting.descriptionPoste }}</p>
+            <p><u>Ville:</u> {{ casting.localisation }}</p>
+            <p><u>Contact:</u> {{ casting.Professionnel.idPersonne.civilite.genre}} {{ casting.Professionnel.idPersonne.nom}} {{ casting.Professionnel.idPersonne.prenom}} : {{ casting.coordonnees }}</p>
+            <p><u>Type de contrat:</u> {{ casting.Contrat.libelle}}</p>
+            <p><u>Type de métier:</u> {{ casting.Metier.libelle}}</p>
+        </div>
+    </div>
+{% endblock %}
