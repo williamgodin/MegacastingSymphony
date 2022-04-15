@@ -1,7 +1,9 @@
 <footer class="footer mt-5 py-3 ">
     <div class="container d-flex justify-content-center">
-        <span class="text-muted">Nombre de castings: {{ castings | length }} |</span>
-        <span class="text-muted">| Dernier casting posté le : {{ castings | last.dateDebutPublication | date("d M Y") }}</span>
 
+        {%  if castings|length >0  %}
+            <span class="text-muted">Nombre de castings: {{ castings | length }} |</span>
+            <span class="text-muted">| Dernier casting posté le : {{ castings | last.dateDebutPublication | date("d M Y") }}</span>
+        {% endif %}
     </div>
 </footer>

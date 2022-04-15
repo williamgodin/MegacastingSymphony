@@ -89,7 +89,7 @@ class Casting
      *
      * @ORM\ManyToOne(targetEntity="TypeDeContrat")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Id_Contrat", referencedColumnName="Id_Contrat")
+     *   @ORM\JoinColumn(name="Id_Contrat", referencedColumnName="Id_Contrat",nullable=false)
      * })
      */
     private $Contrat;
@@ -99,7 +99,7 @@ class Casting
      *
      * @ORM\ManyToOne(targetEntity="Métier")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Id_Metier", referencedColumnName="Id_Metier")
+     *   @ORM\JoinColumn(name="Id_Metier", referencedColumnName="Id_Metier",nullable=false)
      * })
      */
     private $Metier;
@@ -109,7 +109,7 @@ class Casting
      *
      * @ORM\ManyToOne(targetEntity="Professionnel")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Id_Professionnel", referencedColumnName="Id_Personne")
+     *   @ORM\JoinColumn(name="Id_Professionnel", referencedColumnName="Id_Personne",nullable=false)
      * })
      */
     private $Professionnel;
@@ -262,6 +262,11 @@ class Casting
 
         return $this;
     }
-
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Artiste", inversedBy="castings",mappedBy="idPersonne")
+     */
+    private $artistes;
 
 }

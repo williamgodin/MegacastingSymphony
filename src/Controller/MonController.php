@@ -32,6 +32,26 @@ class MonController extends AbstractController
 
 
     }
+    public function footer(ManagerRegistry $doctrine, Request $request): Response
+    {
+        //controle de la rechercher
+        if (isset($_GET['s'])) {
+            $search = $request->query->get('s');
+        }
+
+
+        //Récupération des casting
+        $em = $doctrine->getManager();
+        $castingsREPO = $em->getRepository(Casting::class);
+        $castings = $castingsREPO->findAll();
+
+
+        return $this->render('layout/footer.html.twig', [
+            'castings' => $castings,
+        ]);
+
+
+    }
 
     #[Route('/casting/{id}', name: 'app_casting')]
     public function casting(ManagerRegistry $doctrine, $id): Response

@@ -21,6 +21,8 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
 
-        {{ include("layout/footer.html.twig") }}
+        {{ render(controller(
+            'App\\Controller\\MonController::footer'
+        )) }}
     </body>
 </html>

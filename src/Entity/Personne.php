@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\InheritanceType;
 
 /**
- * Personne
- *
- * @ORM\Table(name="Personne", indexes={@ORM\Index(name="IDX_F6B8ABB937D1AC2", columns={"Id_Civilite"})})
- * @ORM\Entity
+ * @Entity
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorMap({"personne" = "Personne", "artiste" = "Artiste","professionnel" = "Professionnel"})
  */
 class Personne
 {
@@ -66,9 +70,9 @@ class Personne
     /**
      * @var \Civilité
      *
-     * @ORM\ManyToOne(targetEntity="Civilité")
+     * @ORM\ManyToOne(targetEntity="Civilite")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Id_Civilite", referencedColumnName="Id_Civilite")
+     *   @ORM\JoinColumn(name="Id_Civilite", referencedColumnName="Id_Civilite",nullable=false)
      * })
      */
     private $Civilite;
@@ -150,17 +154,18 @@ class Personne
         return $this;
     }
 
-    public function getCivilite(): ?Civilité
+    public function getCivilite(): ?Civilite
     {
         return $this->Civilite;
     }
 
-    public function setCivilite(?Civilité $Civilite): self
+    public function setCivilite(?Civilite $Civilite): self
     {
         $this->Civilite = $Civilite;
 
         return $this;
     }
+
 
 
 }

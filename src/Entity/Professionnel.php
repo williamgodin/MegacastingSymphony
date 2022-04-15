@@ -5,35 +5,53 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Professionnel
- *
- * @ORM\Table(name="Professionnel")
  * @ORM\Entity
  */
-class Professionnel
+class Professionnel extends Personne
 {
-    /**
-     * @var \Personne
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Personne")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Id_Personne", referencedColumnName="Id_Personne")
-     * })
-     */
-    private $idPersonne;
 
-    public function getIdPersonne(): ?Personne
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $loginlourd;
+
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $passwordlourd;
+
+    /**
+     * @return mixed
+     */
+    public function getLoginlourd()
     {
-        return $this->idPersonne;
+        return $this->loginlourd;
     }
 
-    public function setIdPersonne(?Personne $idPersonne): self
+    /**
+     * @param mixed $loginlourd
+     */
+    public function setLoginlourd($loginlourd): void
     {
-        $this->idPersonne = $idPersonne;
+        $this->loginlourd = $loginlourd;
+    }
 
-        return $this;
+    /**
+     * @return string
+     */
+    public function getPasswordlourd(): string
+    {
+        return $this->passwordlourd;
+    }
+
+    /**
+     * @param string $passwordlourd
+     */
+    public function setPasswordlourd(string $passwordlourd): void
+    {
+        $this->passwordlourd = $passwordlourd;
     }
 
 

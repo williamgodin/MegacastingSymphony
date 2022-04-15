@@ -33,7 +33,7 @@ class Métier
      *
      * @ORM\ManyToOne(targetEntity="DomaineDeMétier")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Id_Domaine_metier", referencedColumnName="Id_Domaine_metier")
+     *   @ORM\JoinColumn(name="Id_Domaine_metier", referencedColumnName="Id_Domaine_metier",nullable=false)
      * })
      */
     private $DomaineMetier;
