@@ -12,7 +12,10 @@ use App\Entity\DomaineDeMétier;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use phpDocumentor\Reflection\TypeResolver;
+use phpDocumentor\Reflection\Types\Array_;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Faker\Factory;
+use Faker\Provider\fr_FR\Address;
 
 class AppFixtures extends Fixture
 {
@@ -22,6 +25,9 @@ class AppFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
+
+
+        //region Civilité
         $civ1 = new Civilite();
         $civ1->setGenre("Monsieur");
 
@@ -36,8 +42,10 @@ class AppFixtures extends Fixture
         $manager->persist($civ3);
 
         $i = 0;
+        //endregion
 
-        for ($i; $i < 10 ; $i++){
+        //region Artiste
+        for ($i=0; $i < 10 ; $i++){
             $artiste = new Artiste();
             $artiste->setCivilite($civ1);
             $password= $this->hasher->hashPassword($artiste, 'Test9*');
@@ -51,9 +59,8 @@ class AppFixtures extends Fixture
             $artiste->setAdresse(strtolower("Adresse de la personne"));
             $manager->persist($artiste);
 
-
-
         }
+        //endregion
 
         //region Contrat
         $contrat1 = new TypeDeContrat();
@@ -63,6 +70,8 @@ class AppFixtures extends Fixture
         $contrat2 = new TypeDeContrat();
         $contrat2->setLibelle("CDI");
         $manager->persist($contrat2);
+
+        $contrats =[$contrat1,$contrat2];
         //endregion
 
         //region Domaine Métier
@@ -143,6 +152,8 @@ class AppFixtures extends Fixture
         $metier12->setLibelle("Maquilleur");
         $metier12->setDomaineMetier($domaine4);
         $manager->persist($metier12);
+
+        $metiers = [$metier1,$metier2,$metier3,$metier5,$metier5,$metier6,$metier7,$metier8,$metier9,$metier10,$metier11,$metier12];
         //endregion
 
         //region Professionnel
@@ -200,11 +211,13 @@ class AppFixtures extends Fixture
         $professionnel5->setVille(strtolower("Saumur"));
         $professionnel5->setAdresse(strtolower("5 rue de la charue"));
         $manager->persist($professionnel5);
+
+        $professionnels = [$professionnel1,$professionnel2,$professionnel3,$professionnel4,$professionnel5];
         //endregion
 
         //region Casting
         $casting1 = new Casting();
-        $casting1->setIntitule("Acteur");
+        $casting1->setIntitule("Acteur test");
         $casting1->setReference(271);
         $casting1->setDateDebutPublication(new \DateTime("now"));
         $casting1->setNbrPoste(3);
@@ -277,17 +290,25 @@ class AppFixtures extends Fixture
         $casting5->setMetier($metier4);
         $casting5->setProfessionnel($professionnel5);
         $manager->persist($casting5);
+
+        $faker = Factory::create('fr_FR');
+        for ($i=0; $i < 100 ; $i++) {
+            $casting = new Casting();
+            $casting->setIntitule($faker->realTextBetween(5, 10))
+                ->setReference($faker->randomNumber(3, true))
+                ->setDateDebutPublication(new \DateTime("now"))
+                ->setNbrPoste($faker->numberBetween(1, 5))
+                ->setLocalisation($faker->departmentName())
+                ->setDescriptionPoste("Description du poste")
+                ->setDescriptionProfil("Description du profil dbzhedbnzeadhzebnixzhjndiozjdi nizdbj dna j dnaz l dazjln dka z,kdnak ,od nazk")
+                ->setCoordonnees($faker->serviceNumber())
+                ->setDureeDiffusion(new \DateTime('2022-09-20'))
+                ->setContrat($faker->randomElement($contrats))
+                ->setMetier($faker->randomElement($metiers))
+                ->setProfessionnel($faker->randomElement($professionnels));
+            $manager->persist($casting);
+        }
         //endregion
-
-
-
-
-
-
-
-
-
-
         $manager->flush();
     }
 }

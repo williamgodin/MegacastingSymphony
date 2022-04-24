@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Faker\Factory;
 
 class MonController extends AbstractController
 {
@@ -94,7 +95,12 @@ class MonController extends AbstractController
     {
         //Récupération des castings cinéma
         $em = $doctrine->getManager();
-        $query = $em->createQuery('SELECT casting FROM App\Entity\Casting casting WHERE casting.Metier = 1');
+        $query = $em->createQuery('
+        SELECT casting 
+        FROM App\Entity\Casting casting
+        WHERE casting.Metier = 169
+        OR casting.Metier = 170
+        OR casting.Metier = 171');
         $castingcinema = $query->getResult();
 
         //Récupération des casting
@@ -111,7 +117,12 @@ class MonController extends AbstractController
     {
         //Récupération des castings musique
         $em = $doctrine->getManager();
-        $query = $em->createQuery('SELECT casting FROM App\Entity\Casting casting WHERE casting.Metier = 2');
+        $query = $em->createQuery('SELECT casting 
+        FROM App\Entity\Casting casting
+        WHERE casting.Metier = 172
+        OR casting.Metier = 173
+        OR casting.Metier = 174
+        OR casting.Metier = 175');
         $castingmusique = $query->getResult();
 
         //Récupération des casting
@@ -128,7 +139,10 @@ class MonController extends AbstractController
     {
         //Récupération des castings danse
         $em = $doctrine->getManager();
-        $query = $em->createQuery('SELECT casting FROM App\Entity\Casting casting WHERE casting.Metier = 3');
+        $query = $em->createQuery('SELECT casting 
+        FROM App\Entity\Casting casting
+        WHERE casting.Metier = 176
+        OR casting.Metier = 177');
         $castingdanse = $query->getResult();
 
         //Récupération des casting
@@ -145,7 +159,11 @@ class MonController extends AbstractController
     {
         //Récupération des castings theatre
         $em = $doctrine->getManager();
-        $query = $em->createQuery('SELECT casting FROM App\Entity\Casting casting WHERE casting.Metier = 4');
+        $query = $em->createQuery('SELECT casting 
+        FROM App\Entity\Casting casting
+        WHERE casting.Metier = 178
+        OR casting.Metier = 179
+        OR casting.Metier = 180');
         $castingtheatre = $query->getResult();
 
         //Récupération des casting
