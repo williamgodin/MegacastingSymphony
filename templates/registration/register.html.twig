@@ -18,10 +18,8 @@
         {{ form_row(registrationForm.Ville)}}
         {{ form_row(registrationForm.Email)}}
         {{ form_row(registrationForm.Telephone)}}
-
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Inscription</button>
+        {{ form_row(registrationForm.Adresse)}}
+        <a type="submit" class="btn btn-outline-success align-center">Inscription</a>
         {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

@@ -14,16 +14,30 @@ class MonController extends AbstractController
     #[Route('/', name: 'app_mon')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
+        $em = $doctrine->getManager();
+        $search = '';
         //controle de la rechercher
         if (isset($_GET['s'])) {
             $search = $request->query->get('s');
         }
+        if($request->query->get("s")){
+            $search = $request->query->get("s");
+        }
+        if(strlen((trim($search)) !=0)){
+            $castings = $em->createQuery('SELECT o FROM App\Entity\Casting o WHERE o.intitule LIKE :search');
+            $castings->setParameter('search','%'.$search.'%');
+            $castings = $castings->getResult();
+        }
+        else{
+            $castings = $em->getRepository(Casting::class);
+            $castings = $castings->findAll();
+        }
+        if(empty($castings)){
+            $bool = true;
+        }else {
+            $bool = false;
+        }
 
-
-        //Récupération des casting
-        $em = $doctrine->getManager();
-        $castingsREPO = $em->getRepository(Casting::class);
-        $castings = $castingsREPO->findAll();
 
 
         return $this->render('mon/index.html.twig', [
