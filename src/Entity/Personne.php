@@ -168,20 +168,6 @@ class Personne
         return $this;
     }
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Casting", inversedBy="artistes")
-     * @ORM\JoinTable(name="Participer",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="Id_Personne", referencedColumnName="Id_Personne")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="Id_Casting", referencedColumnName="Id_Casting")
-     *   }
-     * )
-     */
-    private $castings;
 
     /**
      * @ORM\OneToMany(targetEntity=Postuler::class, mappedBy="Personne", orphanRemoval=true)

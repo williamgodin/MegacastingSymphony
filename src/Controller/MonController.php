@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Artiste;
 use App\Entity\Casting;
+use App\Entity\Postuler;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,16 +45,10 @@ class MonController extends AbstractController
         }else {
             $bool = false;
         }
-        $queryPostulations = $em->createQueryBuilder()
-            ->select('p')
-            ->from(Postulation::class,'p')
-            ->where('p.artiste = :artiste')
-            ->setParameter('artiste', $this->getUser()->getIdentifiant());
-        $postulations = $queryPostulations->getQuery()->getResult();
+
 
         return $this->render('mon/index.html.twig', [
             'castings' => $castings,
-            'postulations' => $postulations
         ]);
     }
     public function footer(ManagerRegistry $doctrine, Request $request): Response

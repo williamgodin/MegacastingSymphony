@@ -262,16 +262,10 @@ class Casting
 
         return $this;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Artiste", inversedBy="castings",mappedBy="idPersonne")
-     */
-    private $artistes;
 
     /**
      * @ORM\ManyToOne(targetEntity=Postuler::class, inversedBy="Casting")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Postulations;
 

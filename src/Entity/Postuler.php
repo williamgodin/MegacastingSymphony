@@ -21,9 +21,9 @@ class Postuler
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Personne", inversedBy="Postulations")
+     * @ORM\ManyToOne(targetEntity="Personne", inversedBy="Postulations")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IdPersonne", referencedColumnName="Id_Personne")
+     *   @ORM\JoinColumn(name="identifiant", referencedColumnName="Id_Personne")
      * })
      */
     private $Personne;
@@ -31,13 +31,13 @@ class Postuler
     /**
      * @ORM\ManyToOne(targetEntity="Casting", inversedBy="Postulations")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Casting", referencedColumnName="identifiant")
+     *   @ORM\JoinColumn(name="identifiant", referencedColumnName="Id_Casting",nullable=true)
      * })
      */
     private $Casting;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $datePostulation;
 
