@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Artiste;
 use App\Entity\Casting;
 use App\Entity\Postuler;
+use App\Repository\CastingRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,10 +46,19 @@ class MonController extends AbstractController
         }else {
             $bool = false;
         }
+        $limit = 8;
 
+        $page = (int)$request->query->get("page", 1);
+        $castingRepository = $em->getRepository(Casting::class);
+        $castings = $castingRepository->getPaginateCastings($page, $limit);
+
+        $total = $castingRepository->getTotalCastings();
 
         return $this->render('mon/index.html.twig', [
             'castings' => $castings,
+            'total' => $total,
+            'page'=>$page,
+            'limit'=>$limit,
         ]);
     }
     public function footer(ManagerRegistry $doctrine, Request $request): Response
@@ -111,6 +121,8 @@ class MonController extends AbstractController
         $em = $doctrine->getManager();
         $castingsREPO = $em->getRepository(Casting::class);
         $castings = $castingsREPO->findAll();
+
+
         return $this->render('mon/cinema.html.twig', [
             'castingcinema' => $castingcinema,
             'castings' => $castings,
@@ -193,39 +205,19 @@ class MonController extends AbstractController
         $artiste = $this->security->getUser();
         dump($artiste);
 
+        $queryPostulations = $em->createQueryBuilder()
+            ->select('p')
+            ->from(Postuler::class,'p')
+            ->where('p.Personne = :personne')
+            ->setParameter('personne', $this->getUser()->getIdPersonne());
+        $postulations = $queryPostulations->getQuery()->getResult();
+
 
 
         return $this->render('profil/profil.html.twig', [
             'castings' => $castings,
             'artiste' => $artiste,
+            'postulations' => $postulations,
         ]);
-    }
-    #[Route('/pagination', name:'pagination')]
-    public function pagination(Request $request, OffreRepository $offreRepository){
-        $limit = 2;
-
-        $page = (int)$request->query->get("page", 1);
-
-        $castings = $offreRepository->getPaginateCastings($page, $limit);
-
-        $total = $offreRepository->getTotalCastings();
-
-        return $this->render('pagination/index.html.twig',
-            compact('castings', 'total', 'page', 'limit'));
-    }
-
-    public function getPaginateCastings($page, $limit){
-        $query = $this->createQueryBuilder('o')
-            ->setFirstResult(($page * $limit) - $limit)
-            ->setMaxResults($limit);
-        return $query
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function getTotalCastings(){
-        $query = $this->createQueryBuilder('o')
-            ->select('COUNT(o)');
-        return $query->getQuery()->getSingleScalarResult();
     }
 }

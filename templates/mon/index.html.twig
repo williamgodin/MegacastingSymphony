@@ -25,8 +25,15 @@
             {% if castings == null  %}
                 <p >Pas de correspondance à votre recherche </p>
             {% endif %}
-
-
+            <div class="container mt-4">
+                <ul class="pagination">
+                    {% for item in 1..((total / limit)|round(0, 'ceil')) %}
+                        <li class="page-item page-link">
+                            <a href="?page={{ item }} ">{{ item }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         {% endblock %}
 

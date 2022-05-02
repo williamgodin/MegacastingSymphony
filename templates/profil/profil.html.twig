@@ -16,11 +16,14 @@
         </div>
         <div class="col-md-6 mt-5">
             <p><u>Nom:</u> {{ artiste.nom }}</p>
-            <p><u>Description du poste:</u> {{ artiste.prenom }}</p>
+            <p><u>Prénom:</u> {{ artiste.prenom }}</p>
             <p><u>Lieux:</u> {{ artiste.ville }}</p>
+            <p><u>Adresse:</u> {{ artiste.adresse }}</p>
+            <p><u>Email:</u> {{ artiste.email }}</p>
+            <p><u>Téléphone:</u> {{ artiste.Telephone }}</p>
         </div>
         {% for castings in postulations %}
-            {{ include('layout/littleCasting.html.twig', {'casting': casting}) }}
+            {{ include('layout/littleCasting.html.twig', {'casting': castings.casting}) }}
         {% endfor %}
         {% if castings == null  %}
             <p >Pas de castings </p>

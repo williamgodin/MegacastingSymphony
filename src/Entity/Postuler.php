@@ -23,7 +23,7 @@ class Postuler
     /**
      * @ORM\ManyToOne(targetEntity="Personne", inversedBy="Postulations")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="identifiant", referencedColumnName="Id_Personne")
+     *   @ORM\JoinColumn(name="identifiantPersonne", referencedColumnName="Id_Personne")
      * })
      */
     private $Personne;
@@ -31,7 +31,7 @@ class Postuler
     /**
      * @ORM\ManyToOne(targetEntity="Casting", inversedBy="Postulations")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="identifiant", referencedColumnName="Id_Casting",nullable=true)
+     *   @ORM\JoinColumn(name="identifiantCasting", referencedColumnName="Id_Casting",nullable=true)
      * })
      */
     private $Casting;
@@ -56,7 +56,7 @@ class Postuler
         return $this->personne;
     }
 
-    public function setArtiste(?Personne $personne): self
+    public function setPersonne(?Personne $personne): self
     {
         $this->personne = $personne;
 

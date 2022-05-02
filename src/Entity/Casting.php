@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Casting
  *
  * @ORM\Table(name="Casting", indexes={@ORM\Index(name="IDX_1EA683CC3E490AAF", columns={"Id_Contrat"}), @ORM\Index(name="IDX_1EA683CCF2CA3FF4", columns={"Id_Metier"}), @ORM\Index(name="IDX_1EA683CC604120E2", columns={"Id_Professionnel"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CastingRepository")
  */
 class Casting
 {

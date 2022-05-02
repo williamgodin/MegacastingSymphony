@@ -33,8 +33,7 @@
             <p><u>Type de métier:</u> {{ casting.Metier.libelle}}</p>
             {% if(is_granted("IS_AUTHENTICATED_FULLY")) %}
                 <a type="" class="btn btn-success mt-5 p-4" style="margin-right: 20px";
-                   href="{{ url('app_profil') }}"><b>POSTULER</b>
-
+                   href="{{ path('postuler', {'id': casting.idCasting}) }}"><b>POSTULER</b>
                 </a>
             {% else %}
                 <a type="button" class="btn btn-success mt-5 p-4" style="margin-right: 20px"
