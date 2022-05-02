@@ -46,7 +46,7 @@ class MonController extends AbstractController
         }else {
             $bool = false;
         }
-        $limit = 8;
+        $limit = 12;
 
         $page = (int)$request->query->get("page", 1);
         $castingRepository = $em->getRepository(Casting::class);
@@ -112,9 +112,9 @@ class MonController extends AbstractController
         $query = $em->createQuery('
         SELECT casting 
         FROM App\Entity\Casting casting
-        WHERE casting.Metier = 169
-        OR casting.Metier = 170
-        OR casting.Metier = 171');
+        WHERE casting.Metier = 1
+        OR casting.Metier = 2
+        OR casting.Metier = 3');
         $castingcinema = $query->getResult();
 
         //Récupération des casting
@@ -135,10 +135,10 @@ class MonController extends AbstractController
         $em = $doctrine->getManager();
         $query = $em->createQuery('SELECT casting 
         FROM App\Entity\Casting casting
-        WHERE casting.Metier = 172
-        OR casting.Metier = 173
-        OR casting.Metier = 174
-        OR casting.Metier = 175');
+        WHERE casting.Metier = 4
+        OR casting.Metier = 5
+        OR casting.Metier = 6
+        OR casting.Metier = 7');
         $castingmusique = $query->getResult();
 
         //Récupération des casting
@@ -157,8 +157,8 @@ class MonController extends AbstractController
         $em = $doctrine->getManager();
         $query = $em->createQuery('SELECT casting 
         FROM App\Entity\Casting casting
-        WHERE casting.Metier = 176
-        OR casting.Metier = 177');
+        WHERE casting.Metier = 8
+        OR casting.Metier = 9');
         $castingdanse = $query->getResult();
 
         //Récupération des casting
@@ -177,9 +177,9 @@ class MonController extends AbstractController
         $em = $doctrine->getManager();
         $query = $em->createQuery('SELECT casting 
         FROM App\Entity\Casting casting
-        WHERE casting.Metier = 178
-        OR casting.Metier = 179
-        OR casting.Metier = 180');
+        WHERE casting.Metier = 10
+        OR casting.Metier = 11
+        OR casting.Metier = 12');
         $castingtheatre = $query->getResult();
 
         //Récupération des casting
