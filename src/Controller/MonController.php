@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Artiste;
 use App\Entity\Casting;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,9 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Security;
 
 class MonController extends AbstractController
 {
+    private Security $security;
+    public function __construct(Security $security){
+        $this->security = $security;
+    }
     #[Route('/', name: 'app_mon')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -38,14 +44,17 @@ class MonController extends AbstractController
         }else {
             $bool = false;
         }
-
-
+        $queryPostulations = $em->createQueryBuilder()
+            ->select('p')
+            ->from(Postulation::class,'p')
+            ->where('p.artiste = :artiste')
+            ->setParameter('artiste', $this->getUser()->getIdentifiant());
+        $postulations = $queryPostulations->getQuery()->getResult();
 
         return $this->render('mon/index.html.twig', [
             'castings' => $castings,
+            'postulations' => $postulations
         ]);
-
-
     }
     public function footer(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -174,5 +183,54 @@ class MonController extends AbstractController
             'castingtheatre' => $castingtheatre,
             'castings' => $castings,
         ]);
+    }
+    #[Route('/profil', name: 'app_profil')]
+    public function profil(ManagerRegistry $doctrine): Response
+    {
+
+
+        //Récupération des casting
+        $em = $doctrine->getManager();
+        $castingsREPO = $em->getRepository(Casting::class);
+        $castings = $castingsREPO->findAll();
+
+        //Récupération de l'artiste
+        $artiste = $this->security->getUser();
+        dump($artiste);
+
+
+
+        return $this->render('profil/profil.html.twig', [
+            'castings' => $castings,
+            'artiste' => $artiste,
+        ]);
+    }
+    #[Route('/pagination', name:'pagination')]
+    public function pagination(Request $request, OffreRepository $offreRepository){
+        $limit = 2;
+
+        $page = (int)$request->query->get("page", 1);
+
+        $castings = $offreRepository->getPaginateCastings($page, $limit);
+
+        $total = $offreRepository->getTotalCastings();
+
+        return $this->render('pagination/index.html.twig',
+            compact('castings', 'total', 'page', 'limit'));
+    }
+
+    public function getPaginateCastings($page, $limit){
+        $query = $this->createQueryBuilder('o')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit);
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getTotalCastings(){
+        $query = $this->createQueryBuilder('o')
+            ->select('COUNT(o)');
+        return $query->getQuery()->getSingleScalarResult();
     }
 }

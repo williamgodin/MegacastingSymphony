@@ -269,4 +269,22 @@ class Casting
      */
     private $artistes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Postuler::class, inversedBy="Casting")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Postulations;
+
+    public function getPostulations(): ?Postuler
+    {
+        return $this->Postulations;
+    }
+
+    public function setPostulations(?Postuler $Postulations): self
+    {
+        $this->Postulations = $Postulations;
+
+        return $this;
+    }
+
 }

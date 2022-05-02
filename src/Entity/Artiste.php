@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -99,20 +101,7 @@ class Artiste extends Personne implements UserInterface,PasswordAuthenticatedUse
     {
         $this->login = $login;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Casting", inversedBy="artistes")
-     * @ORM\JoinTable(name="Participer",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="Id_Personne", referencedColumnName="Id_Personne")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="Id_Casting", referencedColumnName="Id_Casting")
-     *   }
-     * )
-     */
-    private $castings;
+
 
 
 

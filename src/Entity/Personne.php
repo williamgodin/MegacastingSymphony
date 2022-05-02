@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -162,6 +164,61 @@ class Personne
     public function setCivilite(?Civilite $Civilite): self
     {
         $this->Civilite = $Civilite;
+
+        return $this;
+    }
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Casting", inversedBy="artistes")
+     * @ORM\JoinTable(name="Participer",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="Id_Personne", referencedColumnName="Id_Personne")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="Id_Casting", referencedColumnName="Id_Casting")
+     *   }
+     * )
+     */
+    private $castings;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Postuler::class, mappedBy="Personne", orphanRemoval=true)
+     */
+    private $Postulations;
+
+    public function __construct()
+    {
+        $this->Postulations = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, Postuler>
+     */
+    public function getPostulations(): Collection
+    {
+        return $this->Postulations;
+    }
+
+    public function addPostulation(Postuler $postulation): self
+    {
+        if (!$this->Postulations->contains($postulation)) {
+            $this->Postulations[] = $postulation;
+            $postulation->setPersonne($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostulation(Postuler $postulation): self
+    {
+        if ($this->Postulations->removeElement($postulation)) {
+            // set the owning side to null (unless already changed)
+            if ($postulation->getPersonne() === $this) {
+                $postulation->getPersonne(null);
+            }
+        }
 
         return $this;
     }

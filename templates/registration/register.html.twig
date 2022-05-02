@@ -7,6 +7,7 @@
 
     <div class="container">
         <h1>Inscription</h1>
+        <p class="d-flex justify-content-center text-decoration-none"><a href="{{ path("login") }}">Si vous êtes déjà inscrit cliquez ICI</a></p>
         {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.login) }}
         {{ form_row(registrationForm.plainPassword, {
@@ -20,6 +21,5 @@
         {{ form_row(registrationForm.Telephone)}}
         {{ form_row(registrationForm.Adresse)}}
         <button type="submit" class="btn btn-outline-success align-center">Inscription</button>
-        {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

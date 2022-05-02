@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+    <div class="row">
+
+    <div class="col-md-12 d-flex flex-wrap justify-content-around">
+        <div class="col-md-6">
+            <h1>Mon Profil</h1>
+            <img src="{{ asset('img/photo-avatar-profil.png') }}" width="300">
+        </div>
+        <div class="col-md-6 mt-5">
+            <p><u>Nom:</u> {{ artiste.nom }}</p>
+            <p><u>Description du poste:</u> {{ artiste.prenom }}</p>
+            <p><u>Lieux:</u> {{ artiste.ville }}</p>
+        </div>
+        {% for castings in postulations %}
+            {{ include('layout/littleCasting.html.twig', {'casting': casting}) }}
+        {% endfor %}
+        {% if castings == null  %}
+            <p >Pas de castings </p>
+        {% endif %}
+    </div>
+{% endblock %}

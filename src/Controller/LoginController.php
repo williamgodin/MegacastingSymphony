@@ -15,7 +15,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;class Log
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('login/index.html.twig', [
 
             'last_username' => $lastUsername,
