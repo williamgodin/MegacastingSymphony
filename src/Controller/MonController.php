@@ -50,7 +50,7 @@ class MonController extends AbstractController
 
         $page = (int)$request->query->get("page", 1);
         $castingRepository = $em->getRepository(Casting::class);
-        $castings = $castingRepository->getPaginateCastings($page, $limit);
+        $castins = $castingRepository->getPaginateCastings($page, $limit);
 
         $total = $castingRepository->getTotalCastings();
 
