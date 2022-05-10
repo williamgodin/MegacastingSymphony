@@ -292,7 +292,7 @@ class AppFixtures extends Fixture
         $manager->persist($casting5);
 
         $faker = Factory::create('fr_FR');
-        for ($i=0; $i < 100 ; $i++) {
+        for ($i=0; $i < 50 ; $i++) {
             $casting = new Casting();
             $casting->setIntitule($faker->realTextBetween(5, 10))
                 ->setReference($faker->randomNumber(3, true))
