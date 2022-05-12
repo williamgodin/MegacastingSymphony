@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
 /**
  * @Entity
  * @InheritanceType("JOINED")
- * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorColumn(name="Profil", type="string")
  * @DiscriminatorMap({"personne" = "Personne", "artiste" = "Artiste","professionnel" = "Professionnel"})
  */
 class Personne

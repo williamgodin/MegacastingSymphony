@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220502182731 extends AbstractMigration
+final class Version20220512090851 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -32,10 +32,11 @@ final class Version20220502182731 extends AbstractMigration
         $this->addSql('CREATE TABLE Type_de_contrat (Id_Contrat INT IDENTITY NOT NULL, Libelle NVARCHAR(50) NOT NULL, PRIMARY KEY (Id_Contrat))');
         $this->addSql('CREATE TABLE artiste (login NVARCHAR(255) NOT NULL, roles VARCHAR(MAX) NOT NULL, password NVARCHAR(255) NOT NULL, Id_Personne INT NOT NULL, PRIMARY KEY (Id_Personne))');
         $this->addSql('EXEC sp_addextendedproperty N\'MS_Description\', N\'(DC2Type:json)\', N\'SCHEMA\', \'dbo\', N\'TABLE\', \'artiste\', N\'COLUMN\', roles');
-        $this->addSql('CREATE TABLE personne (Id_Personne INT IDENTITY NOT NULL, Nom NVARCHAR(50) NOT NULL, Prenom NVARCHAR(50) NOT NULL, Ville NVARCHAR(50) NOT NULL, Adresse NVARCHAR(50) NOT NULL, Email NVARCHAR(50) NOT NULL, Telephone NVARCHAR(50), Id_Civilite INT NOT NULL, discr NVARCHAR(255) NOT NULL, PRIMARY KEY (Id_Personne))');
+        $this->addSql('CREATE TABLE personne (Id_Personne INT IDENTITY NOT NULL, Nom NVARCHAR(50) NOT NULL, Prenom NVARCHAR(50) NOT NULL, Ville NVARCHAR(50) NOT NULL, Adresse NVARCHAR(50) NOT NULL, Email NVARCHAR(50) NOT NULL, Telephone NVARCHAR(50), Id_Civilite INT NOT NULL, Profil NVARCHAR(255) NOT NULL, PRIMARY KEY (Id_Personne))');
         $this->addSql('CREATE INDEX IDX_FCEC9EF37D1AC2 ON personne (Id_Civilite)');
-        $this->addSql('CREATE TABLE postuler (id INT IDENTITY NOT NULL, date_postulation DATETIME2(6), identifiant INT, PRIMARY KEY (id))');
-        $this->addSql('CREATE INDEX IDX_8EC5A68DC90409EC ON postuler (identifiant)');
+        $this->addSql('CREATE TABLE postuler (id INT IDENTITY NOT NULL, date_postulation DATETIME2(6), identifiantPersonne INT, identifiantCasting INT, PRIMARY KEY (id))');
+        $this->addSql('CREATE INDEX IDX_8EC5A68DC8CB16F8 ON postuler (identifiantPersonne)');
+        $this->addSql('CREATE INDEX IDX_8EC5A68D36C192B ON postuler (identifiantCasting)');
         $this->addSql('CREATE TABLE professionnel (loginlourd NVARCHAR(255) NOT NULL, passwordlourd NVARCHAR(255) NOT NULL, Id_Personne INT NOT NULL, PRIMARY KEY (Id_Personne))');
         $this->addSql('CREATE TABLE messenger_messages (id BIGINT IDENTITY NOT NULL, body VARCHAR(MAX) NOT NULL, headers VARCHAR(MAX) NOT NULL, queue_name NVARCHAR(255) NOT NULL, created_at DATETIME2(6) NOT NULL, available_at DATETIME2(6) NOT NULL, delivered_at DATETIME2(6), PRIMARY KEY (id))');
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
@@ -48,6 +49,8 @@ final class Version20220502182731 extends AbstractMigration
         $this->addSql('ALTER TABLE Métier ADD CONSTRAINT FK_572112AC80E84B86 FOREIGN KEY (Id_Domaine_metier) REFERENCES Domaine_de_métier (Id_Domaine_metier)');
         $this->addSql('ALTER TABLE artiste ADD CONSTRAINT FK_9C07354F20FFC8FB FOREIGN KEY (Id_Personne) REFERENCES personne (Id_Personne) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE personne ADD CONSTRAINT FK_FCEC9EF37D1AC2 FOREIGN KEY (Id_Civilite) REFERENCES Civilite (Id_Civilite)');
+        $this->addSql('ALTER TABLE postuler ADD CONSTRAINT FK_8EC5A68DC8CB16F8 FOREIGN KEY (identifiantPersonne) REFERENCES personne (Id_Personne)');
+        $this->addSql('ALTER TABLE postuler ADD CONSTRAINT FK_8EC5A68D36C192B FOREIGN KEY (identifiantCasting) REFERENCES Casting (Id_Casting)');
         $this->addSql('ALTER TABLE professionnel ADD CONSTRAINT FK_7A28C10F20FFC8FB FOREIGN KEY (Id_Personne) REFERENCES personne (Id_Personne) ON DELETE CASCADE');
     }
 
@@ -64,11 +67,13 @@ final class Version20220502182731 extends AbstractMigration
         $this->addSql('CREATE SCHEMA db_owner');
         $this->addSql('CREATE SCHEMA db_securityadmin');
         $this->addSql('CREATE SCHEMA dbo');
+        $this->addSql('ALTER TABLE postuler DROP CONSTRAINT FK_8EC5A68D36C192B');
         $this->addSql('ALTER TABLE personne DROP CONSTRAINT FK_FCEC9EF37D1AC2');
         $this->addSql('ALTER TABLE Métier DROP CONSTRAINT FK_572112AC80E84B86');
         $this->addSql('ALTER TABLE Casting DROP CONSTRAINT FK_1EA683CCF2CA3FF4');
         $this->addSql('ALTER TABLE Casting DROP CONSTRAINT FK_1EA683CC3E490AAF');
         $this->addSql('ALTER TABLE artiste DROP CONSTRAINT FK_9C07354F20FFC8FB');
+        $this->addSql('ALTER TABLE postuler DROP CONSTRAINT FK_8EC5A68DC8CB16F8');
         $this->addSql('ALTER TABLE professionnel DROP CONSTRAINT FK_7A28C10F20FFC8FB');
         $this->addSql('ALTER TABLE Casting DROP CONSTRAINT FK_1EA683CC2D1C3652');
         $this->addSql('ALTER TABLE Casting DROP CONSTRAINT FK_1EA683CC604120E2');
